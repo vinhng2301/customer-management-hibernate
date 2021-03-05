@@ -1,6 +1,7 @@
 package cg.wbd.grandemonstration;
 
 import cg.wbd.grandemonstration.service.CustomerService;
+import cg.wbd.grandemonstration.service.impl.HibernateCustomerServiceImpl;
 import cg.wbd.grandemonstration.service.impl.SimpleCustomerServiceImpl;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -8,6 +9,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -17,6 +19,9 @@ import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ITemplateResolver;
+
+import javax.sql.DataSource;
+import java.util.Properties;
 
 @Configuration
 @EnableWebMvc
@@ -55,6 +60,22 @@ public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 
     @Bean
     public CustomerService customerService() {
-        return new SimpleCustomerServiceImpl();
+        return new HibernateCustomerServiceImpl();
+    }
+
+    @Bean
+    public DataSource dataSource(){
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/orm?useSSL=false");
+        dataSource.setUsername("root");
+        dataSource.setPassword("012130201");
+        return dataSource;
+    }
+    Properties additionalProperties(){
+        Properties properties = new Properties();
+        properties.setProperty("hibernate.hbm2ddl.auto","update");
+        properties.setProperty("hibernate.dialect","org.hibernate.dialect.MySQL5Dialect");
+        return properties;
     }
 }

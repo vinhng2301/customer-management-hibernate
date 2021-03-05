@@ -1,6 +1,7 @@
 package cg.wbd.grandemonstration.service;
 
 import cg.wbd.grandemonstration.model.Customer;
+import org.springframework.context.annotation.Bean;
 
 import java.util.List;
 

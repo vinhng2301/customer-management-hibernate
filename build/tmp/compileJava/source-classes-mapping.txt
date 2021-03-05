@@ -1,5 +1,7 @@
 cg/wbd/grandemonstration/service/impl/SimpleCustomerServiceImpl.java
  cg.wbd.grandemonstration.service.impl.SimpleCustomerServiceImpl
+cg/wbd/grandemonstration/service/impl/HibernateCustomerServiceImpl.java
+ cg.wbd.grandemonstration.service.impl.HibernateCustomerServiceImpl
 cg/wbd/grandemonstration/model/Customer.java
  cg.wbd.grandemonstration.model.Customer
 cg/wbd/grandemonstration/service/CustomerService.java
